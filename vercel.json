@@ -22,5 +22,8 @@
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "PYTHONPATH": "backend"
+  }
 }
