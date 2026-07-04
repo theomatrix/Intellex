@@ -17,6 +17,45 @@ const features = [
   { icon: MessageSquare, title: 'AI Chat', desc: 'Ask questions grounded in company intelligence data' },
 ]
 
+function MagicButton({ 
+  children, 
+  onClick, 
+  type = 'button', 
+  disabled = false, 
+  className = '', 
+  isLoading = false 
+}) {
+  return (
+    <motion.button
+      type={type}
+      onClick={onClick}
+      disabled={disabled || isLoading}
+      whileHover={{ scale: disabled || isLoading ? 1 : 1.02 }}
+      whileTap={{ scale: disabled || isLoading ? 1 : 0.98 }}
+      className={`
+        relative group overflow-hidden rounded-xl font-semibold text-white
+        transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed
+        shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(168,85,247,0.6)]
+        ${className}
+      `}
+    >
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-gradient" />
+      
+      {/* Shine effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjbWFjcm8pIi8+PC9zdmc+')] mix-blend-overlay" />
+      
+      {/* Content wrapper */}
+      <div className="relative z-10 flex items-center justify-center gap-2 drop-shadow-md">
+        {children}
+      </div>
+      
+      {/* Glowing border effect */}
+      <div className="absolute inset-0 rounded-xl border border-white/20 group-hover:border-white/50 transition-colors duration-300" />
+    </motion.button>
+  );
+}
+
 export default function Home() {
   const [companyName, setCompanyName] = useState('')
   const [companyUrl, setCompanyUrl] = useState('')
@@ -27,7 +66,9 @@ export default function Home() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault()
+    
     if (!companyName && !companyUrl) {
       setError('Please enter a company name or website URL')
       return
@@ -116,7 +157,7 @@ export default function Home() {
               transition={{ delay: 0.4 }}
               className="max-w-2xl mx-auto"
             >
-              <div className="glass p-4 rounded-2xl gradient-border space-y-4">
+              <form onSubmit={handleSubmit} className="glass p-4 rounded-2xl gradient-border space-y-4 relative z-20">
                 <div className="flex flex-col sm:flex-row gap-2">
                   <div className="flex-1 relative">
                     <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
@@ -126,7 +167,7 @@ export default function Home() {
                       placeholder="Company name (e.g., Stripe)"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="input-field pl-12 bg-surface-200/30 border-transparent w-full"
+                      className="input-field pl-12 bg-surface-200/30 border-transparent w-full relative z-30"
                     />
                   </div>
                   <div className="flex-1 relative">
@@ -137,7 +178,7 @@ export default function Home() {
                       placeholder="Website URL (optional)"
                       value={companyUrl}
                       onChange={(e) => setCompanyUrl(e.target.value)}
-                      className="input-field pl-12 bg-surface-200/30 border-transparent w-full"
+                      className="input-field pl-12 bg-surface-200/30 border-transparent w-full relative z-30"
                     />
                   </div>
                 </div>
@@ -150,14 +191,14 @@ export default function Home() {
                       placeholder="OpenRouter API Key (sk-or-v1-...)"
                       value={openRouterKey}
                       onChange={(e) => setOpenRouterKey(e.target.value)}
-                      className="input-field pl-12 bg-surface-200/30 border-transparent w-full"
+                      className="input-field pl-12 bg-surface-200/30 border-transparent w-full relative z-30"
                     />
                   </div>
                   <div className="flex-1 relative">
                     <select
                       value={aiModel}
                       onChange={(e) => setAiModel(e.target.value)}
-                      className="input-field bg-surface-200/30 border-transparent w-full appearance-none px-4 text-text-secondary"
+                      className="input-field bg-surface-200/30 border-transparent w-full appearance-none px-4 text-text-secondary relative z-30"
                     >
                       <option value="openrouter/free">Auto Free Router (Free)</option>
                       <option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B (Free)</option>
@@ -168,28 +209,28 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="flex justify-center pt-2">
-                  <button
-                    id="analyze-button"
-                    type="button"
-                    onClick={handleSubmit}
+                <div className="flex justify-center pt-2 relative z-30">
+                  <MagicButton
+                    type="submit"
+                    isLoading={isLoading}
                     disabled={isLoading}
-                    className="btn-primary flex items-center justify-center gap-2 min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full sm:w-auto min-w-[240px] px-8 py-4"
                   >
                     {isLoading ? (
                       <>
                         <Cpu className="w-5 h-5 animate-spin" />
-                        <span>{loadingText}</span>
+                        <span className="tracking-wide">{loadingText}</span>
                       </>
                     ) : (
                       <>
-                        <Search className="w-5 h-5" />
-                        <span>Analyze Company</span>
+                        <Search className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+                        <span className="tracking-wide">Analyze Company</span>
+                        <ArrowRight className="w-4 h-4 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                       </>
                     )}
-                  </button>
+                  </MagicButton>
                 </div>
-              </div>
+              </form>
 
               {error && (
                 <motion.p
