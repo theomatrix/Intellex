@@ -39,24 +39,22 @@ export default function Home() {
     }
 
     let loadingInterval;
-    if (!error) {
-      setIsLoading(true)
-      setError('')
-      const loadingMessages = [
-        'Connecting to services...',
-        'Searching company data...',
-        'Crawling website...',
-        'Analyzing data with AI...',
-        'Generating final report...',
-        'Almost there, please wait...'
-      ];
-      let msgIndex = 0;
+    setIsLoading(true)
+    setError('')
+    const loadingMessages = [
+      'Connecting to services...',
+      'Searching company data...',
+      'Crawling website...',
+      'Analyzing data with AI...',
+      'Generating final report...',
+      'Almost there, please wait...'
+    ];
+    let msgIndex = 0;
+    setLoadingText(loadingMessages[msgIndex]);
+    loadingInterval = setInterval(() => {
+      msgIndex = (msgIndex + 1) % loadingMessages.length;
       setLoadingText(loadingMessages[msgIndex]);
-      loadingInterval = setInterval(() => {
-        msgIndex = (msgIndex + 1) % loadingMessages.length;
-        setLoadingText(loadingMessages[msgIndex]);
-      }, 5000);
-    }
+    }, 5000);
 
     try {
       const result = await startAnalysis({
