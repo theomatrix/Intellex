@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     # ── Serper.dev API ──────────────────────────────
     SERPER_API_KEY: str = ""
 
+    # ── Nvidia API ──────────────────────────────────
+    NVIDIA_API_KEY: str = ""
+
     # ── Session Management ───────────────────────────
     SESSION_TTL: int = 1800  # 30 minutes in seconds
 
