@@ -27,8 +27,7 @@ export default function Home() {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     if (!companyName && !companyUrl) {
       setError('Please enter a company name or website URL')
       return
@@ -111,11 +110,10 @@ export default function Home() {
             </p>
 
             {/* Search Form */}
-            <motion.form
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              onSubmit={handleSubmit}
               className="max-w-2xl mx-auto"
             >
               <div className="glass p-4 rounded-2xl gradient-border space-y-4">
@@ -152,7 +150,6 @@ export default function Home() {
                       placeholder="OpenRouter API Key (sk-or-v1-...)"
                       value={openRouterKey}
                       onChange={(e) => setOpenRouterKey(e.target.value)}
-                      required
                       className="input-field pl-12 bg-surface-200/30 border-transparent w-full"
                     />
                   </div>
@@ -174,7 +171,8 @@ export default function Home() {
                 <div className="flex justify-center pt-2">
                   <button
                     id="analyze-button"
-                    type="submit"
+                    type="button"
+                    onClick={handleSubmit}
                     disabled={isLoading}
                     className="btn-primary flex items-center justify-center gap-2 min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed"
                   >
@@ -202,7 +200,7 @@ export default function Home() {
                   {error}
                 </motion.p>
               )}
-            </motion.form>
+            </motion.div>
 
             {/* Quick suggestions */}
             <motion.div
