@@ -1,0 +1,25 @@
+# ─── Intellex Backend Dependencies ───────────────────
+# Core
+fastapi==0.115.*
+uvicorn[standard]==0.34.*
+pydantic==2.*
+pydantic-settings==2.*
+python-dotenv==1.*
+
+# HTTP & Async
+httpx==0.28.*
+aiohttp==3.*
+
+# HTML Parsing
+selectolax==0.3.*
+beautifulsoup4==4.*
+
+# AI / LLM
+openai==1.*
+
+# Report & PDF
+markdown==3.*
+reportlab==4.*
+
+# SSE
+sse-starlette==2.*
