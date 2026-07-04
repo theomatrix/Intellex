@@ -3,12 +3,12 @@ import os
 import uuid
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from backend.models.schemas import SearchRequest, SearchResponse
-from backend.crawler.scraper import Scraper
-from backend.services.serper import SerperService
-from backend.services.openrouter import OpenRouterService
-from backend.services.discord import DiscordService
-from backend.services.pdf import PDFService
+from models.schemas import SearchRequest, SearchResponse
+from crawler.scraper import Scraper
+from services.serper import SerperService
+from services.openrouter import OpenRouterService
+from services.discord import DiscordService
+from services.pdf import PDFService
 
 router = APIRouter()
 

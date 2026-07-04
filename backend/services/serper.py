@@ -2,7 +2,7 @@ import httpx
 import os
 from typing import Dict, Any
 
-from backend.config import settings
+from config import settings
 
 class SerperService:
     def __init__(self):

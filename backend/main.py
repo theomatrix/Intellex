@@ -12,12 +12,12 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.config import settings
-from backend.api.search import router as search_router
-from backend.api.chat import router as chat_router
-from backend.api.download import router as download_router
-from backend.api.discord import router as discord_router
-from backend.api.report import router as report_router
+from config import settings
+from api.search import router as search_router
+from api.chat import router as chat_router
+from api.download import router as download_router
+from api.discord import router as discord_router
+from api.report import router as report_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

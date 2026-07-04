@@ -1,8 +1,8 @@
 import json
 import os
 from fastapi import APIRouter, HTTPException
-from backend.models.schemas import ChatRequest, ChatResponse
-from backend.services.openrouter import OpenRouterService
+from models.schemas import ChatRequest, ChatResponse
+from services.openrouter import OpenRouterService
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from backend.services.discord import DiscordService
+from services.discord import DiscordService
 import os
 
 router = APIRouter()
