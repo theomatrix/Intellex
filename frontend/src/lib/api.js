@@ -1,4 +1,4 @@
-const API_BASE = 'https://intellex-api.onrender.com/api'
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api'
 
 export async function startAnalysis(data) {
   const res = await fetch(`${API_BASE}/search`, {
