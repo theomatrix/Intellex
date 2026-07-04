@@ -15,6 +15,7 @@ export default function Report() {
   // Try to use reportData from navigation state if available, otherwise null to trigger fetch
   const initialReport = location.state?.reportData || null
   const openRouterKey = location.state?.openRouterKey || ''
+  const aiModel = location.state?.aiModel || 'google/gemini-2.5-flash'
   
   const [report, setReport] = useState(initialReport)
   const [loading, setLoading] = useState(!initialReport)
@@ -165,7 +166,7 @@ export default function Report() {
               </button>
               <Link
                 to={`/chat/${sessionId}`}
-                state={{ openRouterKey }}
+                state={{ openRouterKey, aiModel }}
                 className="btn-primary w-full flex items-center justify-center gap-2 text-sm"
               >
                 <MessageSquare className="w-4 h-4" />

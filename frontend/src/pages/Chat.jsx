@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import {
@@ -18,7 +18,10 @@ const SUGGESTED_QUESTIONS = [
 
 export default function Chat() {
   const { sessionId } = useParams()
-  const { messages, isLoading, sendMessage } = useChat(sessionId)
+  const location = useLocation()
+  const openRouterKey = location.state?.openRouterKey || ''
+  const aiModel = location.state?.aiModel || 'google/gemini-2.5-flash'
+  const { messages, isLoading, sendMessage } = useChat(sessionId, openRouterKey, aiModel)
   const [input, setInput] = useState('')
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)

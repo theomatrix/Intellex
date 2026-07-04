@@ -41,7 +41,7 @@ Analyze the data and return the structured JSON report. Ensure pain points and c
 
         headers = {
             "Authorization": f"Bearer {api_key}",
-            "HTTP-Referer": "http://localhost:5173", # Standard required header for OpenRouter
+            "HTTP-Referer": "https://intellex-iota.vercel.app", # Standard required header for OpenRouter
             "X-Title": "Intellex",
             "Content-Type": "application/json"
         }
@@ -81,7 +81,7 @@ Analyze the data and return the structured JSON report. Ensure pain points and c
         """Handle chat interactions using OpenRouter."""
         headers = {
             "Authorization": f"Bearer {api_key}",
-            "HTTP-Referer": "http://localhost:5173",
+            "HTTP-Referer": "https://intellex-iota.vercel.app",
             "X-Title": "Intellex",
             "Content-Type": "application/json"
         }

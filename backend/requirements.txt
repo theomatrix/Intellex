@@ -12,14 +12,7 @@ aiohttp==3.*
 
 # HTML Parsing
 selectolax==0.3.*
-beautifulsoup4==4.*
-
-# AI / LLM
-openai==1.*
 
 # Report & PDF
 markdown==3.*
 reportlab==4.*
-
-# SSE
-sse-starlette==2.*

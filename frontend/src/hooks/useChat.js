@@ -4,7 +4,7 @@ import { sendChatMessage } from '../lib/api'
 /**
  * Hook to manage chat state and messaging.
  */
-export function useChat(sessionId) {
+export function useChat(sessionId, openRouterKey, model) {
   const [messages, setMessages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -19,14 +19,12 @@ export function useChat(sessionId) {
     setError(null)
 
     try {
-      const response = await sendChatMessage(sessionId, text)
+      const response = await sendChatMessage(sessionId, text, openRouterKey, model)
 
       // Add AI response
       const aiMsg = {
         role: 'assistant',
         content: response.answer,
-        sources: response.sources,
-        confidence: response.confidence,
         timestamp: Date.now(),
       }
       setMessages(prev => [...prev, aiMsg])
@@ -42,7 +40,7 @@ export function useChat(sessionId) {
     } finally {
       setIsLoading(false)
     }
-  }, [sessionId])
+  }, [sessionId, openRouterKey, model])
 
   const clearMessages = useCallback(() => {
     setMessages([])

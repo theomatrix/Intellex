@@ -22,11 +22,16 @@ export async function getReport(sessionId) {
   return res.json()
 }
 
-export async function sendChatMessage(data) {
+export async function sendChatMessage(sessionId, message, openRouterKey, model = 'google/gemini-2.5-flash') {
   const res = await fetch(`${API_BASE}/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      session_id: sessionId,
+      message: message,
+      openrouter_api_key: openRouterKey,
+      model: model,
+    }),
   })
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: 'Chat failed' }))

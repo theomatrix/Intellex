@@ -9,10 +9,6 @@ class SearchRequest(BaseModel):
     """Input for starting a company analysis."""
     company_name: str = Field(default="", description="Company name to research")
     company_url: str = Field(default="", description="Company website URL")
-    applicant_name: str = Field(default="", description="Applicant Name")
-    applicant_email: str = Field(default="", description="Applicant Email")
-    discord_bot_token: str = Field(default="", description="Discord Bot Token")
-    discord_channel_id: str = Field(default="", description="Discord Channel ID")
     openrouter_api_key: str = Field(default="", description="OpenRouter API Key")
     model: str = Field(default="google/gemini-2.5-flash", description="AI Model")
 
