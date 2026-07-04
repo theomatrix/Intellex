@@ -7,17 +7,17 @@
     },
     {
       "src": "frontend/package.json",
-      "use": "@vercel/vite"
+      "use": "@vercel/static-build"
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/backend/main.py"
+      "destination": "backend/main.py"
     },
     {
-      "source": "/(.*)",
-      "destination": "/frontend/dist/$1"
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }
